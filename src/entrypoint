@@ -1,0 +1,16 @@
+#!/bin/bash
+source /etc/sysconfig/httpd
+
+if [ -z "${PIDFILE}" ]; then
+    PIDFILE=/var/run/httpd/httpd.pid
+fi
+
+if [ -f "${PIDFILE}" ]; then
+    rm "${PIDFILE}"
+fi
+
+if [ "$1" == "LOCK" ]; then
+    touch /var/www/html/db/lock
+fi
+chown -R apache:apache /var/www/html
+/usr/sbin/httpd -DFOREGROUND "$@"
