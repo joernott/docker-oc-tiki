@@ -13,4 +13,12 @@ if [ "$1" == "LOCK" ]; then
     touch /var/www/html/db/lock
 fi
 chown -R apache:apache /var/www/html
+
+if [ -n "${SERVERNAME}" ]; then
+    echo "ServerName ${SERVERNAME}" >>/etc/httpd/conf.d/tiki.conf
+fi
+if [ -n "${SERVERALIAS}" ]; then
+    echo "ServerAlias ${SERVERALIAS}" >>/etc/httpd/conf.d/tiki.conf
+fi
+
 /usr/sbin/httpd -DFOREGROUND "$@"
