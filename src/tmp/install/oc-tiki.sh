@@ -13,6 +13,6 @@ tar -xzf tiki-${TIKI_VERSION}.tar.gz
 mv tiki-${TIKI_VERSION} /var/www/html
 cd /var/www/html
 chmod a+x setup.sh
-mv _htaccess .htaccess
+cp _htaccess /etc/httpd/conf.d/tiki.conf
 ./setup.sh -u apache -g apache fix
 cleanup

@@ -16,6 +16,7 @@ chown -R apache:apache /var/www/html
 
 if [ -n "${SERVERNAME}" ]; then
     echo "ServerName ${SERVERNAME}" >>/etc/httpd/conf.d/tiki.conf
+    sed -e "s/^#Hostname=.*/Hostname>=${SERVERNAME}/" -i /etc/ssmtp/ssmtp.conf
 fi
 if [ -n "${SERVERALIAS}" ]; then
     echo "ServerAlias ${SERVERALIAS}" >>/etc/httpd/conf.d/tiki.conf
