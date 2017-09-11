@@ -29,5 +29,6 @@ fi
 if [ -n "${SERVERALIAS}" ]; then
     sed -e "s/#ServerAlias./ServerAlias ${SERVERALIAS}/" -i /etc/httpd/conf.d/tiki.conf
 fi
+cat /etc/httpd/conf.d/*.conf
 
 /usr/sbin/httpd -DFOREGROUND "$@"
