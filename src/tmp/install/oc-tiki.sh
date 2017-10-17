@@ -5,7 +5,7 @@ set -x
 
 curl -sSo /tmp/install/functions.sh https://raw.githubusercontent.com/joernott/docker-oc-install-library/master/install_functions.sh
 source /tmp/install/functions.sh
-install_software ssmtp
+install_software ssmtp which
 cd /tmp
 curl -jkLo tiki-${TIKI_VERSION}.tar.gz "https://downloads.sourceforge.net/project/tikiwiki/Tiki_${TIKI_CODENAME}/${TIKI_VERSION}/tiki-${TIKI_VERSION}.tar.gz?use_mirror=netcologne"
 tar -xzf tiki-${TIKI_VERSION}.tar.gz
