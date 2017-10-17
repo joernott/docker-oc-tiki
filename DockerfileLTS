@@ -1,7 +1,7 @@
 FROM registry.ott-consult.de/oc/apache-php:5.6
 MAINTAINER Joern Ott <joern.ott@ott-consult.de>
 
-ENV TIKI_VERSION=15.4 \
+ENV TIKI_VERSION=15.5 \
     TIKI_CODENAME=15.x_Situla \
     HTTP_PORT=80
 
