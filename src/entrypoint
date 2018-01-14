@@ -13,14 +13,6 @@ if [ "$1" == "LOCK" ]; then
     touch /var/www/html/db/lock
 fi
 chown -R apache:apache /var/www/html
-cat >/etc/httpd/conf.d/tiki.conf <<EOF
-Listen ${HTTP_PORT}
-<VirtualHost *:${HTTP_PORT}>
-        ServerName tiki
-	#ServerAlias www.tiki
-	DocumentRoot /var/www/html
-</VirtualHost>
-EOF
 
 if [ -n "${SERVERNAME}" ]; then
     sed -e "s/ServerName.*/ServerName ${SERVERNAME}/" -i /etc/httpd/conf.d/tiki.conf

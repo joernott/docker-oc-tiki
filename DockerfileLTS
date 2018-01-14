@@ -9,7 +9,6 @@ COPY src /
 
 RUN /tmp/install/oc-tiki.sh
 
-EXPOSE 80
 EXPOSE 443
 
 ENTRYPOINT /entrypoint
