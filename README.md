@@ -1,6 +1,12 @@
 # Docker image: Tiki 15 LTS on CentOS 7 with Apache 2.4 and PHP 5.6 from IUS
 This image starts Apache 2.4 from the IUS repository (2.4.37) to serve Tiki LTS.
 
+To provide a correct ssl certificate and key, mount them in
+* /etc/pki/tls/certs/server.crt
+* /etc/pki/tls/private/server.key
+
+Set the enviromnemt variable SERVERNAME to math thew server name to the certificate.
+
 To provide a static configuration file, mount it to /var/www/db/local.php.
 
 The following folders should be made persistent:
