@@ -15,7 +15,7 @@ function install_tiki() {
 }
 
 function configure_apache() {
-cat >>/etc/httpd/tiki.conf <<EOF
+cat >>/etc/httpd/conf.d/tiki.conf <<EOF
 
 Listen 443 https
 SSLPassPhraseDialog exec:/usr/libexec/httpd-ssl-pass-dialog
