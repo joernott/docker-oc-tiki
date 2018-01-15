@@ -40,7 +40,7 @@ SSLCryptoDevice builtin
     SSLProxyCipherSuite HIGH:MEDIUM:!MD5:!RC4
     SSLCertificateFile /etc/pki/tls/certs/server.crt
     SSLCertificateKeyFile /etc/pki/tls/private/server.key
-
+    #SSLCertificateChainFile /etc/pki/tls/certs/chain.crt
     <FilesMatch "\.(cgi|shtml|phtml|php)$">
         SSLOptions +StdEnvVars
     </FilesMatch>

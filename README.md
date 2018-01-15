@@ -4,7 +4,7 @@ This image starts Apache 2.4 from the IUS repository (2.4.37) to serve Tiki LTS.
 To provide a correct ssl certificate and key, mount them in
 * /etc/pki/tls/certs/server.crt
 * /etc/pki/tls/private/server.key
-
+* /etc/pki/tls/certs/chain.crt (if you need a certificate chain)
 Set the enviromnemt variable SERVERNAME to math thew server name to the certificate.
 
 To provide a static configuration file, mount it to /var/www/db/local.php.

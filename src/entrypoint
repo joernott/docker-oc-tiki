@@ -21,5 +21,7 @@ fi
 if [ -n "${SERVERALIAS}" ]; then
     sed -e "s/#ServerAlias./ServerAlias ${SERVERALIAS}/" -i /etc/httpd/conf.d/tiki.conf
 fi
-
+if [ -f /etc/pki/tls/certs/chain.crt ]; then
+    sed -e 's/#SSLCertificateChainFile/SSLCertificateChainFile/' -i /etc/httpd/conf.d/tiki.conf
+fi
 /usr/sbin/httpd -DFOREGROUND "$@"
