@@ -58,7 +58,7 @@ SSLCryptoDevice builtin
                                     
 EOF
     sed -e 's/^Listen/#Listen/' -i /etc/httpd/conf/httpd.conf
-    rm conf.d/ssl.conf 
+    rm /etc/httpd/conf.d/ssl.conf 
     cp /etc/pki/tls/certs/localhost.crt /etc/pki/tls/certs/server.crt
     cp /etc/pki/tls/private/localhost.key /etc/pki/tls/private/server.key
 
