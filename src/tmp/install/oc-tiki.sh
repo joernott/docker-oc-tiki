@@ -14,7 +14,7 @@ function install_tiki() {
     ./setup.sh -u apache -g apache fix
 }
 
-functioon configure_apache() {
+function configure_apache() {
 cat >>/etc/httpd/tiki.conf <<EOF
 
 Listen 443 https
@@ -59,15 +59,15 @@ SSLCryptoDevice builtin
 </VirtualHost>
                                     
 EOF
-    sed -e 's/^Listen/#Listen/' -i /etc/httpd/httpd.conf
-    rm conf.d/ssl.conf 
+    sed -e 's/^Listen/#Listen/' -i /etc/httpd/conf/httpd.conf
+    rm /etc/httpd/conf.d/ssl.conf 
     cp /etc/pki/tls/certs/localhost.crt /etc/pki/tls/certs/server.crt
     cp /etc/pki/tls/private/localhost.key /etc/pki/tls/private/server.key
 
 }
 
 source /tmp/install/functions.sh
-install_software ssmtp which
+install_software ssmtp which bzip2
 install_tiki
 configure_apache
 cleanup
