@@ -26,6 +26,8 @@ SSLRandomSeed connect builtin
 SSLCryptoDevice builtin
 
 <VirtualHost _default_:443>
+    ServerName www
+    #ServerAlias web
     ErrorLog logs/ssl_error_log
     TransferLog logs/ssl_access_log
     LogLevel warn
