@@ -14,7 +14,7 @@ function install_tiki() {
     ./setup.sh -u apache -g apache fix
 }
 
-functioon configure_apache() {
+function configure_apache() {
 cat >>/etc/httpd/tiki.conf <<EOF
 
 Listen 443 https
