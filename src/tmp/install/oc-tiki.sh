@@ -28,8 +28,8 @@ SSLCryptoDevice builtin
 <VirtualHost _default_:443>
     ServerName www
     #ServerAlias web
-    ErrorLog logs/ssl_error_log
-    TransferLog logs/ssl_access_log
+    ErrorLog /dev/stderr
+    TransferLog /dev/stdout
     LogLevel warn
     SSLEngine on
 
@@ -53,7 +53,7 @@ SSLCryptoDevice builtin
         nokeepalive ssl-unclean-shutdown \
         downgrade-1.0 force-response-1.0
            
-    CustomLog logs/ssl_request_log \
+    CustomLog /dev/stdout \
         "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
                                     
 </VirtualHost>
