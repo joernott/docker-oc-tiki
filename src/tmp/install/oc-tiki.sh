@@ -65,7 +65,7 @@ EOF
 }
 
 source /tmp/install/functions.sh
-install_software ssmtp which
+install_software ssmtp which bzip2
 install_tiki
 configure_apache
 cleanup
