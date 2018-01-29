@@ -39,7 +39,7 @@ It will also handle SSL certificates by copying *.crt files from /data/ssl to /e
 *.key files to /etc/pki/tls/private/.
 
 Migrating from the multiple mounts can be achieved by mounting the old folders and config together with /data and
-setting the environment variable DATADIR
+setting the environment variable MIGRATE_DATADIR. The container stops after a successful migration.
 
 ## Environment variables
 
@@ -48,7 +48,7 @@ setting the environment variable DATADIR
 | LOCK       | To create the lock file, set this to any non-empty value                                  |
 | SERVERNAME | Specify the Servername for the VHost, this should match the SSL certificate               | 
 | SERVERALIAS| Specify ServerAlias directive for the VHost, the entries should match the SSL certificate |
-| DATADIR    | Handles a central data directory mounted at /data (see above)                             |
+| MIGRATE_DATADIR | Handles a central data directory mounted at /data (see above)                        |
 
 
 ## Usage:

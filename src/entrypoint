@@ -8,9 +8,9 @@ function setup_data() {
     if [ ! -d /data/${DIR} ]; then
         mkdir -p /data/${DIR}
     fi
+    set +e
     /bin/mv /var/www/html/${DIR}/* /data/${DIR}/
-    /bin/rm -r /var/www/html/${DIR}
-    /bin/ln -s /data/${DIR} /var/www/html/${DIR}
+    set -e
 }
 
 if [ -z "${PIDFILE}" ]; then
@@ -26,7 +26,7 @@ if [ -n "$LOCK" ]; then
 fi
 chown -R apache:apache /var/www/html
 
-if [ -n "$DATADIR" ]; then
+if [ -n "$MIGRATE_DATADIR" ]; then
     setup_data "dump"
     setup_data "files"
     setup_data "img/wiki"
@@ -57,6 +57,7 @@ if [ -n "$DATADIR" ]; then
     fi
     cp /data/ssl/*.crt /etc/pki/tls/certs/
     cp /data/ssl/*.key /etc/pki/tls/private/
+    exit 0
 fi
 
 if [ -n "${SERVERNAME}" ]; then
