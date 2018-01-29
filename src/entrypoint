@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 source /etc/sysconfig/httpd
 
 function setup_data() {
@@ -6,9 +7,9 @@ function setup_data() {
     if [ ! -d /data/${DIR} ]; then
         mkdir -p /data/${DIR}
     fi
-    mv /var/www/html/${DIR}/* /data/${DIR}/
-    rm -r /var/www/html/${DIR}
-    ln -s /data/${DIR} /var/www/html/${DIR}
+    /bin/mv /var/www/html/${DIR}/* /data/${DIR}/
+    /bin/rm -r /var/www/html/${DIR}
+    /bin/ln -s /data/${DIR} /var/www/html/${DIR}
 }
 
 if [ -z "${PIDFILE}" ]; then
