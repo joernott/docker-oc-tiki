@@ -1,6 +1,16 @@
 #!/bin/bash
 source /etc/sysconfig/httpd
 
+function setup_data() {
+    local DIR=$1
+    if [ ! -d /data/${DIR} ]; then
+        mkdir -p /data/${DIR}
+    fi
+    mv /var/www/html/${DIR}/* /data/${DIR}/
+    rm -r /var/www/html/${DIR}
+    ln -s /data/${DIR} /var/www/html/${DIR}
+}
+
 if [ -z "${PIDFILE}" ]; then
     PIDFILE=/var/run/httpd/httpd.pid
 fi
@@ -9,10 +19,43 @@ if [ -f "${PIDFILE}" ]; then
     rm "${PIDFILE}"
 fi
 
-if [ "$1" == "LOCK" ]; then
+if [ -n "$LOCK" ]; then
     touch /var/www/html/db/lock
 fi
 chown -R apache:apache /var/www/html
+
+if [ -n "$DATADIR" ]; then
+    setup_data "dump"
+    setup_data "files"
+    setup_data "img/wiki"
+    setup_data "img/wiki_up"
+
+    if [ ! -d /data/db ]; then
+        mkdir -p /data/db
+    fi
+    if [ ! -f /data/db/local.php]; then
+        cp /var/www/html/db/local.php /data/db/local.php
+    fi
+    rm /var/www/html/db/local.php
+    ln -s /data/db/local.php /var/www/html/db/local.php
+  
+    if [ ! -d /data/ssl ]; then
+        mkdir -p /data/ssl
+    fi
+    if [ ! -f /data/ssl/server.key ]; then
+        cp /etc/pki/tls/private/server.key /data/ssl/server.key
+    fi
+    if [ ! -f /data/ssl/server.crt ]; then
+        cp /etc/pki/tls/certs/server.crt /data/ssl/server.crt
+    fi
+    if [ ! -f /data/ssl/chain.crt ]; then
+        if [ -f /etc/pki/tls/certs/chain.crt ]; then
+            cp /etc/pki/tls/certs/chain.crt /data/ssl/chain.crt
+        fi
+    fi
+    cp /data/ssl/*.crt /etc/pki/tls/certs/
+    cp /data/ssl/*.key /etc/pki/tls/private/
+fi
 
 if [ -n "${SERVERNAME}" ]; then
     sed -e "s/ServerName.*/ServerName ${SERVERNAME}/" -i /etc/httpd/conf.d/tiki.conf
