@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e
-set -x
 source /etc/sysconfig/httpd
 
 function setup_data() {
@@ -11,6 +10,13 @@ function setup_data() {
     set +e
     /bin/mv /var/www/html/${DIR}/* /data/${DIR}/
     set -e
+}
+
+function setup_links() {
+    local DIR=$1
+    rm -rf /var/www/html/$DIR
+    ln -s /data/$DIR /var/www/html/$DIR
+    chmod 0777 /data/$DIR
 }
 
 if [ -z "${PIDFILE}" ]; then
@@ -38,8 +44,6 @@ if [ -n "$MIGRATE_DATADIR" ]; then
     if [ ! -f /data/db/local.php]; then
         cp /var/www/html/db/local.php /data/db/local.php
     fi
-    rm /var/www/html/db/local.php
-    ln -s /data/db/local.php /var/www/html/db/local.php
   
     if [ ! -d /data/ssl ]; then
         mkdir -p /data/ssl
@@ -55,9 +59,20 @@ if [ -n "$MIGRATE_DATADIR" ]; then
             cp /etc/pki/tls/certs/chain.crt /data/ssl/chain.crt
         fi
     fi
+    exit 0
+fi
+if [ -n "$DATADIR" ]; then
+    setup_links "dump"
+    setup_links "files"
+    setup_links "img/wiki"
+    setup_links "img/wiki_up"
+    set +e
+    rm /var/www/html/db/local.php
+    ln -s /data/db/local.php /var/www/html/db/local.php
+    chmod 0777 /data/db
     cp /data/ssl/*.crt /etc/pki/tls/certs/
     cp /data/ssl/*.key /etc/pki/tls/private/
-    exit 0
+    set -e
 fi
 
 if [ -n "${SERVERNAME}" ]; then
