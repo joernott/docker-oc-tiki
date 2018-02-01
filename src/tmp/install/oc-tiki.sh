@@ -60,10 +60,10 @@ SSLCryptoDevice builtin
                                     
 EOF
     sed -e 's/^Listen/#Listen/' -i /etc/httpd/conf/httpd.conf
+    sed /etc/php.ini -e 's|;include_path = "\.:.*|include_path = ".:/php/includes:/data/db"|'
     rm /etc/httpd/conf.d/ssl.conf 
     cp /etc/pki/tls/certs/localhost.crt /etc/pki/tls/certs/server.crt
     cp /etc/pki/tls/private/localhost.key /etc/pki/tls/private/server.key
-
 }
 
 source /tmp/install/functions.sh
