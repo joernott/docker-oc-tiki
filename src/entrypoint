@@ -31,7 +31,10 @@ if [ -n "$LOCK" ]; then
     touch /var/www/html/db/lock
 fi
 chown -R apache:apache /var/www/html
-
+if [ -d /data ]; then
+    chmod 0755 /data
+    chown -R apache:apache /data/files /data/dump /data/img/wiki /data/img/wiki_up
+fi
 if [ -n "$MIGRATE_DATADIR" ]; then
     setup_data "dump"
     setup_data "files"
