@@ -1,7 +1,7 @@
 FROM registry.ott-consult.de/oc/apache-php:5.6
 LABEL MAINTAINER="joern.ott@ott-consult.de"
 
-ENV TIKI_VERSION=15.5 \
+ENV TIKI_VERSION=15.6 \
     TIKI_CODENAME=15.x_Situla \
     GIT_COMMIT="x" \
     IMAGE_HISTORY="x"

@@ -1,8 +1,8 @@
 FROM registry.ott-consult.de/oc/apache-php:5.6
 LABEL MAINTAINER="joern.ott@ott-consult.de"
 
-ENV TIKI_VERSION=17.1 \
-    TIKI_CODENAME=17.x_Zeta_Bootis \
+ENV TIKI_VERSION=18.1 \
+    TIKI_CODENAME=18.x_Alcyone \
     GIT_COMMIT="x" \
     IMAGE_HISTORY="x"
 

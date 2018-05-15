@@ -1,5 +1,5 @@
-# Docker image: Tiki 15 LTS on CentOS 7 with Apache 2.4 and PHP 5.6 from IUS
-This image starts Apache 2.4 from the IUS repository (2.4.37) to serve Tiki LTS.
+# Docker image: Tiki 15 LTS and 18.1 on CentOS 7 with Apache 2.4 and PHP 5.6 from IUS
+These images serve Tiki LTS and current
 
 To provide a correct ssl certificate and key, mount them in
 * /etc/pki/tls/certs/server.crt
@@ -53,7 +53,7 @@ setting the environment variable MIGRATE_DATADIR. The container stops after a su
 
 ## Usage:
 ```
-docker run -d -p 80:80  \
+docker run -d -p 443:443  \
     -e LOCK=yes \
     -e SERVERNAME=www.example.com \
     -e SERVERALIAS=example.com \
